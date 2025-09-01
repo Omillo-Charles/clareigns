@@ -19,7 +19,30 @@ const CloseIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
 
 const Header: React.FC<HeaderProps> = ({ onHomeClick }) => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const navLinks = ['Shop', 'About', 'Contact'];
+    
+    const handleNavigation = (section: string) => {
+        setIsMenuOpen(false);
+        
+        switch (section) {
+            case 'home':
+                onHomeClick();
+                break;
+            case 'shop':
+                // Navigate to shop section (products grid)
+                window.location.hash = '#/shop';
+                break;
+            case 'about':
+                // Navigate to about section
+                window.location.hash = '#/about';
+                break;
+            case 'contact':
+                // Navigate to contact section
+                window.location.hash = '#/contact';
+                break;
+            default:
+                onHomeClick();
+        }
+    };
 
     return (
         <header className="sticky top-0 bg-white/95 backdrop-blur-md z-50 shadow-soft border-b border-brand-pink-light/30">
@@ -28,7 +51,7 @@ const Header: React.FC<HeaderProps> = ({ onHomeClick }) => {
                     <div className="flex-shrink-0">
                         <a 
                             href="#/" 
-                            onClick={(e) => { e.preventDefault(); onHomeClick(); }} 
+                            onClick={(e) => { e.preventDefault(); handleNavigation('home'); }} 
                             className="text-3xl font-serif font-bold text-brand-text tracking-wider hover:text-brand-pink-dark transition-colors duration-300"
                         >
                            Clareigns <span className="text-brand-gold">Collection</span>
@@ -38,22 +61,36 @@ const Header: React.FC<HeaderProps> = ({ onHomeClick }) => {
                         <div className="ml-10 flex items-baseline space-x-8">
                             <a 
                                 href="#/" 
-                                onClick={(e) => { e.preventDefault(); onHomeClick(); }} 
-                                className="text-brand-text hover:text-brand-pink-dark px-3 py-2 text-sm font-medium tracking-wider transition-colors duration-300 relative group"
+                                onClick={(e) => { e.preventDefault(); handleNavigation('home'); }} 
+                                className="text-brand-text hover:text-brand-pink-dark px-3 py-2 text-sm font-medium tracking-wider transition-colors duration-300 relative group cursor-pointer"
                             >
                                 HOME
                                 <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-brand-pink-dark transition-all duration-300 group-hover:w-full"></span>
                             </a>
-                            {navLinks.map(link => (
-                                <a 
-                                    key={link} 
-                                    href="#" 
-                                    className="text-brand-text hover:text-brand-pink-dark px-3 py-2 text-sm font-medium tracking-wider transition-colors duration-300 relative group"
-                                >
-                                    {link.toUpperCase()}
-                                    <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-brand-pink-dark transition-all duration-300 group-hover:w-full"></span>
-                                </a>
-                            ))}
+                            <a 
+                                href="#/shop" 
+                                onClick={(e) => { e.preventDefault(); handleNavigation('shop'); }} 
+                                className="text-brand-text hover:text-brand-pink-dark px-3 py-2 text-sm font-medium tracking-wider transition-colors duration-300 relative group cursor-pointer"
+                            >
+                                SHOP
+                                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-brand-pink-dark transition-all duration-300 group-hover:w-full"></span>
+                            </a>
+                            <a 
+                                href="#/about" 
+                                onClick={(e) => { e.preventDefault(); handleNavigation('about'); }} 
+                                className="text-brand-text hover:text-brand-pink-dark px-3 py-2 text-sm font-medium tracking-wider transition-colors duration-300 relative group cursor-pointer"
+                            >
+                                ABOUT
+                                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-brand-pink-dark transition-all duration-300 group-hover:w-full"></span>
+                            </a>
+                            <a 
+                                href="#/contact" 
+                                onClick={(e) => { e.preventDefault(); handleNavigation('contact'); }} 
+                                className="text-brand-text hover:text-brand-pink-dark px-3 py-2 text-sm font-medium tracking-wider transition-colors duration-300 relative group cursor-pointer"
+                            >
+                                CONTACT
+                                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-brand-pink-dark transition-all duration-300 group-hover:w-full"></span>
+                            </a>
                         </div>
                     </nav>
                     <div className="-mr-2 flex md:hidden">
@@ -73,20 +110,32 @@ const Header: React.FC<HeaderProps> = ({ onHomeClick }) => {
                     <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white/95 backdrop-blur-md border-t border-brand-pink-light/30">
                          <a 
                             href="#/" 
-                            onClick={(e) => { e.preventDefault(); onHomeClick(); setIsMenuOpen(false);}} 
-                            className="text-brand-text hover:bg-brand-pink-light hover:text-brand-pink-dark block px-3 py-2 rounded-lg text-base font-medium transition-all duration-300"
+                            onClick={(e) => { e.preventDefault(); handleNavigation('home'); }} 
+                            className="text-brand-text hover:bg-brand-pink-light hover:text-brand-pink-dark block px-3 py-2 rounded-lg text-base font-medium transition-all duration-300 cursor-pointer"
                         >
                             HOME
                         </a>
-                        {navLinks.map(link => (
-                            <a 
-                                key={link} 
-                                href="#" 
-                                className="text-brand-text hover:bg-brand-pink-light hover:text-brand-pink-dark block px-3 py-2 rounded-lg text-base font-medium transition-all duration-300"
-                            >
-                                {link.toUpperCase()}
-                            </a>
-                        ))}
+                        <a 
+                            href="#/shop" 
+                            onClick={(e) => { e.preventDefault(); handleNavigation('shop'); }} 
+                            className="text-brand-text hover:bg-brand-pink-light hover:text-brand-pink-dark block px-3 py-2 rounded-lg text-base font-medium transition-all duration-300 cursor-pointer"
+                        >
+                            SHOP
+                        </a>
+                        <a 
+                            href="#/about" 
+                            onClick={(e) => { e.preventDefault(); handleNavigation('about'); }} 
+                            className="text-brand-text hover:bg-brand-pink-light hover:text-brand-pink-dark block px-3 py-2 rounded-lg text-base font-medium transition-all duration-300 cursor-pointer"
+                        >
+                            ABOUT
+                        </a>
+                        <a 
+                            href="#/contact" 
+                            onClick={(e) => { e.preventDefault(); handleNavigation('contact'); }} 
+                            className="text-brand-text hover:bg-brand-pink-light hover:text-brand-pink-dark block px-3 py-2 rounded-lg text-base font-medium transition-all duration-300 cursor-pointer"
+                        >
+                            CONTACT
+                        </a>
                     </div>
                 </div>
             )}

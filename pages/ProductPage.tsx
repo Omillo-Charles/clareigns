@@ -11,9 +11,28 @@ const ProductPage: React.FC<ProductPageProps> = ({ product }) => {
   const [selectedSize, setSelectedSize] = useState<string | null>(product.sizes[1] || null);
   const [mainImage, setMainImage] = useState<string>(product.imageUrl);
 
+  const handleBackToHome = () => {
+    window.location.hash = '#/';
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-brand-cream to-white">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-24">
+        {/* Back Button */}
+        <div className="mb-8">
+          <Button 
+            variant="outline" 
+            size="sm" 
+            onClick={handleBackToHome}
+            className="flex items-center gap-2 hover:bg-brand-pink-light"
+          >
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+            </svg>
+            Back to Collections
+          </Button>
+        </div>
+
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 animate-fade-in">
           {/* Image Gallery */}
           <div className="space-y-6">
