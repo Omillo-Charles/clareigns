@@ -4,7 +4,7 @@ import HomePage from './pages/HomePage';
 import ProductPage from './pages/ProductPage';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import WhatsAppButton from './components/WhatsAppButton';
+
 import { Product } from './types';
 import { products } from './constants';
 
@@ -327,7 +327,6 @@ const App: React.FC = () => {
         {currentPage === 'about' && <AboutPage />}
         {currentPage === 'contact' && <ContactPage />}
       </main>
-      <WhatsAppButton />
       <Footer />
     </div>
   );
