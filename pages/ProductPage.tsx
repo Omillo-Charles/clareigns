@@ -75,7 +75,7 @@ const ProductPage: React.FC<ProductPageProps> = ({ product }) => {
                 {product.name}
               </h1>
               <p className="text-3xl lg:text-4xl text-brand-pink-dark font-semibold">
-                ${product.price.toFixed(2)}
+                KES {product.price.toLocaleString()}
               </p>
             </div>
             

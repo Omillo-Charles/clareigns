@@ -23,7 +23,7 @@ const Hero: React.FC<{ onShopNowClick: () => void }> = ({ onShopNowClick }) => (
                 <Button variant="primary" size="lg" onClick={onShopNowClick} className="shadow-elegant">
                     Shop Now
                 </Button>
-                <Button variant="outline" size="lg" onClick={onShopNowClick} className="border-white text-white hover:bg-white hover:text-brand-text">
+                <Button variant="outline" size="lg" onClick={onShopNowClick} className="border-white text-white hover:bg-white hover:text-brand-pink-dark hover:border-brand-pink-dark">
                     Explore Collections
                 </Button>
             </div>
@@ -167,7 +167,7 @@ const ProductCard: React.FC<{ product: Product; onProductClick: (product: Produc
                 {product.name}
             </h3>
             <p className="text-xl sm:text-2xl font-bold text-brand-pink-dark">
-                ${product.price.toFixed(2)}
+                KES {product.price.toLocaleString()}
             </p>
             <p className="text-sm text-brand-text-light leading-relaxed line-clamp-2">
                 {product.description}

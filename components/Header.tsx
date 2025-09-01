@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 interface HeaderProps {
     onHomeClick: () => void;
@@ -19,9 +19,34 @@ const CloseIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
 
 const Header: React.FC<HeaderProps> = ({ onHomeClick }) => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [currentPage, setCurrentPage] = useState('home');
+    
+    // Check current page based on URL hash
+    useEffect(() => {
+        const checkCurrentPage = () => {
+            const hash = window.location.hash;
+            if (hash === '#/' || hash === '') {
+                setCurrentPage('home');
+            } else if (hash === '#/shop') {
+                setCurrentPage('shop');
+            } else if (hash === '#/about') {
+                setCurrentPage('about');
+            } else if (hash === '#/contact') {
+                setCurrentPage('contact');
+            } else if (hash.startsWith('#/product/')) {
+                setCurrentPage('shop'); // Product pages are part of the shop section
+            }
+        };
+
+        checkCurrentPage();
+        window.addEventListener('hashchange', checkCurrentPage);
+        
+        return () => window.removeEventListener('hashchange', checkCurrentPage);
+    }, []);
     
     const handleNavigation = (section: string) => {
         setIsMenuOpen(false);
+        setCurrentPage(section);
         
         switch (section) {
             case 'home':
@@ -44,6 +69,8 @@ const Header: React.FC<HeaderProps> = ({ onHomeClick }) => {
         }
     };
 
+    const isActive = (section: string) => currentPage === section;
+
     return (
         <header className="sticky top-0 bg-white/95 backdrop-blur-md z-50 shadow-soft border-b border-brand-pink-light/30">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -52,7 +79,11 @@ const Header: React.FC<HeaderProps> = ({ onHomeClick }) => {
                         <a 
                             href="#/" 
                             onClick={(e) => { e.preventDefault(); handleNavigation('home'); }} 
-                            className="text-3xl font-serif font-bold text-brand-text tracking-wider hover:text-brand-pink-dark transition-colors duration-300"
+                            className={`text-3xl font-serif font-bold tracking-wider transition-colors duration-300 ${
+                                isActive('home') 
+                                    ? 'text-brand-pink-dark' 
+                                    : 'text-brand-text hover:text-brand-pink-dark'
+                            }`}
                         >
                            Clareigns <span className="text-brand-gold">Collection</span>
                         </a>
@@ -62,34 +93,58 @@ const Header: React.FC<HeaderProps> = ({ onHomeClick }) => {
                             <a 
                                 href="#/" 
                                 onClick={(e) => { e.preventDefault(); handleNavigation('home'); }} 
-                                className="text-brand-text hover:text-brand-pink-dark px-3 py-2 text-sm font-medium tracking-wider transition-colors duration-300 relative group cursor-pointer"
+                                className={`px-3 py-2 text-sm font-medium tracking-wider transition-all duration-300 relative group cursor-pointer ${
+                                    isActive('home') 
+                                        ? 'text-brand-pink-dark font-semibold' 
+                                        : 'text-brand-text hover:text-brand-pink-dark'
+                                }`}
                             >
                                 HOME
-                                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-brand-pink-dark transition-all duration-300 group-hover:w-full"></span>
+                                <span className={`absolute bottom-0 left-0 h-0.5 bg-brand-pink-dark transition-all duration-300 ${
+                                    isActive('home') ? 'w-full' : 'w-0 group-hover:w-full'
+                                }`}></span>
                             </a>
                             <a 
                                 href="#/shop" 
                                 onClick={(e) => { e.preventDefault(); handleNavigation('shop'); }} 
-                                className="text-brand-text hover:text-brand-pink-dark px-3 py-2 text-sm font-medium tracking-wider transition-colors duration-300 relative group cursor-pointer"
+                                className={`px-3 py-2 text-sm font-medium tracking-wider transition-all duration-300 relative group cursor-pointer ${
+                                    isActive('shop') 
+                                        ? 'text-brand-pink-dark font-semibold' 
+                                        : 'text-brand-text hover:text-brand-pink-dark'
+                                }`}
                             >
                                 SHOP
-                                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-brand-pink-dark transition-all duration-300 group-hover:w-full"></span>
+                                <span className={`absolute bottom-0 left-0 h-0.5 bg-brand-pink-dark transition-all duration-300 ${
+                                    isActive('shop') ? 'w-full' : 'w-0 group-hover:w-full'
+                                }`}></span>
                             </a>
                             <a 
                                 href="#/about" 
                                 onClick={(e) => { e.preventDefault(); handleNavigation('about'); }} 
-                                className="text-brand-text hover:text-brand-pink-dark px-3 py-2 text-sm font-medium tracking-wider transition-colors duration-300 relative group cursor-pointer"
+                                className={`px-3 py-2 text-sm font-medium tracking-wider transition-all duration-300 relative group cursor-pointer ${
+                                    isActive('about') 
+                                        ? 'text-brand-pink-dark font-semibold' 
+                                        : 'text-brand-text hover:text-brand-pink-dark'
+                                }`}
                             >
                                 ABOUT
-                                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-brand-pink-dark transition-all duration-300 group-hover:w-full"></span>
+                                <span className={`absolute bottom-0 left-0 h-0.5 bg-brand-pink-dark transition-all duration-300 ${
+                                    isActive('about') ? 'w-full' : 'w-0 group-hover:w-full'
+                                }`}></span>
                             </a>
                             <a 
                                 href="#/contact" 
                                 onClick={(e) => { e.preventDefault(); handleNavigation('contact'); }} 
-                                className="text-brand-text hover:text-brand-pink-dark px-3 py-2 text-sm font-medium tracking-wider transition-colors duration-300 relative group cursor-pointer"
+                                className={`px-3 py-2 text-sm font-medium tracking-wider transition-all duration-300 relative group cursor-pointer ${
+                                    isActive('contact') 
+                                        ? 'text-brand-pink-dark font-semibold' 
+                                        : 'text-brand-text hover:text-brand-pink-dark'
+                                }`}
                             >
                                 CONTACT
-                                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-brand-pink-dark transition-all duration-300 group-hover:w-full"></span>
+                                <span className={`absolute bottom-0 left-0 h-0.5 bg-brand-pink-dark transition-all duration-300 ${
+                                    isActive('contact') ? 'w-full' : 'w-0 group-hover:w-full'
+                                }`}></span>
                             </a>
                         </div>
                     </nav>
@@ -111,31 +166,68 @@ const Header: React.FC<HeaderProps> = ({ onHomeClick }) => {
                          <a 
                             href="#/" 
                             onClick={(e) => { e.preventDefault(); handleNavigation('home'); }} 
-                            className="text-brand-text hover:bg-brand-pink-light hover:text-brand-pink-dark block px-3 py-2 rounded-lg text-base font-medium transition-all duration-300 cursor-pointer"
+                            className={`block px-3 py-2 rounded-lg text-base font-medium transition-all duration-300 cursor-pointer ${
+                                isActive('home') 
+                                    ? 'bg-brand-pink-dark text-white' 
+                                    : 'text-brand-text hover:bg-brand-pink-light hover:text-brand-pink-dark'
+                            }`}
                         >
                             HOME
                         </a>
                         <a 
                             href="#/shop" 
                             onClick={(e) => { e.preventDefault(); handleNavigation('shop'); }} 
-                            className="text-brand-text hover:bg-brand-pink-light hover:text-brand-pink-dark block px-3 py-2 rounded-lg text-base font-medium transition-all duration-300 cursor-pointer"
+                            className={`block px-3 py-2 rounded-lg text-base font-medium transition-all duration-300 cursor-pointer ${
+                                isActive('shop') 
+                                    ? 'bg-brand-pink-dark text-white' 
+                                    : 'text-brand-text hover:bg-brand-pink-light hover:text-brand-pink-dark'
+                            }`}
                         >
                             SHOP
                         </a>
                         <a 
                             href="#/about" 
                             onClick={(e) => { e.preventDefault(); handleNavigation('about'); }} 
-                            className="text-brand-text hover:bg-brand-pink-light hover:text-brand-pink-dark block px-3 py-2 rounded-lg text-base font-medium transition-all duration-300 cursor-pointer"
+                            className={`block px-3 py-2 rounded-lg text-base font-medium transition-all duration-300 cursor-pointer ${
+                                isActive('about') 
+                                    ? 'bg-brand-pink-dark text-white' 
+                                    : 'text-brand-text hover:bg-brand-pink-light hover:text-brand-pink-dark'
+                            }`}
                         >
                             ABOUT
                         </a>
                         <a 
                             href="#/contact" 
                             onClick={(e) => { e.preventDefault(); handleNavigation('contact'); }} 
-                            className="text-brand-text hover:bg-brand-pink-light hover:text-brand-pink-dark block px-3 py-2 rounded-lg text-base font-medium transition-all duration-300 cursor-pointer"
+                            className={`block px-3 py-2 rounded-lg text-base font-medium transition-all duration-300 cursor-pointer ${
+                                isActive('contact') 
+                                    ? 'bg-brand-pink-dark text-white' 
+                                    : 'text-brand-text hover:bg-brand-pink-light hover:text-brand-pink-dark'
+                            }`}
                         >
                             CONTACT
                         </a>
+                    </div>
+                </div>
+            )}
+            
+            {/* Breadcrumb Indicator */}
+            {currentPage !== 'home' && (
+                <div className="border-t border-brand-pink-light/20 bg-white/50 backdrop-blur-sm">
+                    <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-2">
+                        <div className="flex items-center space-x-2 text-sm">
+                            <a 
+                                href="#/" 
+                                onClick={(e) => { e.preventDefault(); handleNavigation('home'); }}
+                                className="text-brand-text-light hover:text-brand-pink-dark transition-colors duration-300"
+                            >
+                                Home
+                            </a>
+                            <span className="text-brand-pink-light">/</span>
+                            <span className="text-brand-pink-dark font-medium capitalize">
+                                {currentPage === 'shop' && window.location.hash.startsWith('#/product/') ? 'Product' : currentPage}
+                            </span>
+                        </div>
                     </div>
                 </div>
             )}

@@ -12,7 +12,7 @@ export const collections: Collection[] = [
 export const sampleProduct: Product = {
   id: 101,
   name: 'Elegant Floral Maxi Dress',
-  price: 129.99,
+  price: 2899,
   imageUrl: '/Screenshot 2025-09-01 210002.png',
   images: [
     '/Screenshot 2025-09-01 210002.png',
@@ -30,7 +30,7 @@ export const products: Product[] = [
   {
     id: 101,
     name: 'Elegant Floral Maxi Dress',
-    price: 129.99,
+    price: 2899,
     imageUrl: '/Screenshot 2025-09-01 210002.png',
     images: [
       '/Screenshot 2025-09-01 210002.png',
@@ -45,7 +45,7 @@ export const products: Product[] = [
   {
     id: 102,
     name: 'Chic Summer Top',
-    price: 89.99,
+    price: 1899,
     imageUrl: '/Screenshot 2025-09-01 205947.png',
     images: [
       '/Screenshot 2025-09-01 205947.png',
@@ -60,7 +60,7 @@ export const products: Product[] = [
   {
     id: 103,
     name: 'Classic High-Waist Bottoms',
-    price: 79.99,
+    price: 1699,
     imageUrl: '/Screenshot 2025-09-01 200957.png',
     images: [
       '/Screenshot 2025-09-01 200957.png',
@@ -75,7 +75,7 @@ export const products: Product[] = [
   {
     id: 104,
     name: 'Coordination Set',
-    price: 149.99,
+    price: 3299,
     imageUrl: '/Screenshot 2025-09-01 200943.png',
     images: [
       '/Screenshot 2025-09-01 200943.png',
@@ -90,7 +90,7 @@ export const products: Product[] = [
   {
     id: 105,
     name: 'Statement Accessories',
-    price: 59.99,
+    price: 999,
     imageUrl: '/Screenshot 2025-09-01 200932.png',
     images: [
       '/Screenshot 2025-09-01 200932.png',
@@ -105,7 +105,7 @@ export const products: Product[] = [
   {
     id: 106,
     name: 'Evening Gown',
-    price: 199.99,
+    price: 3499,
     imageUrl: '/Screenshot 2025-09-01 200919.png',
     images: [
       '/Screenshot 2025-09-01 200919.png',
@@ -120,7 +120,7 @@ export const products: Product[] = [
   {
     id: 107,
     name: 'Casual Blouse',
-    price: 69.99,
+    price: 1499,
     imageUrl: '/Screenshot 2025-09-01 200859.png',
     images: [
       '/Screenshot 2025-09-01 200859.png',
@@ -135,7 +135,7 @@ export const products: Product[] = [
   {
     id: 108,
     name: 'Designer Jeans',
-    price: 119.99,
+    price: 2499,
     imageUrl: '/Screenshot 2025-09-01 200826.png',
     images: [
       '/Screenshot 2025-09-01 200826.png',

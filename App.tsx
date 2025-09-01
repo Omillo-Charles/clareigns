@@ -133,7 +133,7 @@ const App: React.FC = () => {
                     {product.name}
                   </h3>
                   <p className="text-white/90 text-sm font-light tracking-wide">
-                    ${product.price.toFixed(2)}
+                    KES {product.price.toLocaleString()}
                   </p>
                 </div>
               </div>
