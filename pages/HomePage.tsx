@@ -1,0 +1,99 @@
+
+import React from 'react';
+import Button from '../components/Button';
+import { collections } from '../constants';
+import { Collection } from '../types';
+
+interface HomePageProps {
+  onProductClick: () => void;
+}
+
+const Hero: React.FC<{ onShopNowClick: () => void }> = ({ onShopNowClick }) => (
+    <div className="relative h-[80vh] min-h-[600px] md:h-screen bg-cover bg-center bg-fixed" style={{ backgroundImage: "url('/Screenshot 2025-09-01 200919.png')" }}>
+        <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/30 to-black/50"></div>
+        <div className="relative z-10 flex flex-col items-center justify-center h-full text-center text-white px-4 animate-fade-in">
+            <h1 className="text-5xl md:text-7xl lg:text-8xl font-serif font-bold leading-tight drop-shadow-lg tracking-wide">
+                Elegance in Every <span className="text-brand-gold-light">Thread</span>
+            </h1>
+            <p className="mt-6 max-w-2xl text-lg md:text-xl font-light tracking-wide drop-shadow-md leading-relaxed">
+                Discover curated collections that define modern femininity and timeless style. 
+                Each piece tells a story of sophistication and grace.
+            </p>
+            <div className="mt-10 space-x-4">
+                <Button variant="primary" size="lg" onClick={onShopNowClick} className="shadow-elegant">
+                    Shop Now
+                </Button>
+                <Button variant="outline" size="lg" onClick={onShopNowClick} className="border-white text-white hover:bg-white hover:text-brand-text">
+                    Explore Collections
+                </Button>
+            </div>
+        </div>
+        <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-brand-cream to-transparent"></div>
+    </div>
+);
+
+const CollectionCard: React.FC<{ collection: Collection; onProductClick: () => void; index: number }> = ({ collection, onProductClick, index }) => (
+    <div 
+        className="group relative overflow-hidden rounded-2xl shadow-soft hover:shadow-elegant cursor-pointer transform transition-all duration-500 hover:scale-105 animate-slide-up"
+        style={{ animationDelay: `${index * 100}ms` }}
+        onClick={onProductClick}
+    >
+        <img 
+            src={collection.imageUrl} 
+            alt={collection.name} 
+            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-brand-pink-dark/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+        <div className="absolute bottom-0 left-0 right-0 p-6 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
+            <h3 className="text-white text-2xl font-serif font-bold tracking-wider drop-shadow-lg mb-2">
+                {collection.name}
+            </h3>
+            <p className="text-white/90 text-sm font-light tracking-wide opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                Discover the latest trends
+            </p>
+        </div>
+        <div className="absolute top-4 right-4 w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500 transform scale-75 group-hover:scale-100">
+            <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+        </div>
+    </div>
+);
+
+const CollectionsGrid: React.FC<{ onProductClick: () => void }> = ({ onProductClick }) => (
+    <section className="py-20 sm:py-32 bg-gradient-to-b from-brand-cream to-white">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-16 animate-fade-in">
+                <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-brand-text mb-6">
+                    Featured <span className="text-brand-pink-dark">Collections</span>
+                </h2>
+                <p className="max-w-3xl mx-auto text-lg text-brand-text-light leading-relaxed">
+                    Explore our hand-picked selections, designed for every occasion. 
+                    From casual elegance to formal sophistication, find your perfect style.
+                </p>
+            </div>
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 md:gap-8">
+                {collections.map((collection, index) => (
+                    <div
+                        key={collection.id}
+                        className={`${index === 0 ? 'col-span-2 row-span-2' : ''} ${index === 3 ? 'md:col-span-2' : ''}`}
+                    >
+                         <CollectionCard collection={collection} onProductClick={onProductClick} index={index} />
+                    </div>
+                ))}
+            </div>
+        </div>
+    </section>
+);
+
+const HomePage: React.FC<HomePageProps> = ({ onProductClick }) => {
+  return (
+    <>
+      <Hero onShopNowClick={onProductClick} />
+      <CollectionsGrid onProductClick={onProductClick} />
+    </>
+  );
+};
+
+export default HomePage;
